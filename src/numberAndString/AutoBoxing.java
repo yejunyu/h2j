@@ -8,8 +8,11 @@ package numberAndString;
  3. 通过Byte获取byte的最大值
  */
 
-
-public class autoBoxing {
+/**
+ * @author yejunyu
+ * @date 2017/12/12
+ */
+public class AutoBoxing {
     public static void main(String[] args) {
         // 1
         byte b1 = 1;
