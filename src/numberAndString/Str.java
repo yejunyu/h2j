@@ -56,12 +56,34 @@ public class Str {
         }
         System.out.println(Arrays.toString(str));
     }
+    public static String randomStr1(int length){
+        String str = "aAbBcCdDeEfFgGhHiIjJkKlLmMnNoOpPqQrRsStTuUvVwWxXyYzZ0123456789";
+        Random random = new Random();
+        StringBuffer buffer = new StringBuffer();
+        for (int i = 0; i < length; i++) {
+            buffer.append(str.charAt(random.nextInt(str.length())));
+        }
+        return  buffer.toString();
+    }
     // 循环穷举
-    public static void test1(){
-
+    public static void test1(String password){
+        String str = "aAbBcCdDeEfFgGhHiIjJkKlLmMnNoOpPqQrRsStTuUvVwWxXyYzZ0123456789";
+        for (int i = 0; i < str.length(); i++) {
+            for (int j = 0; j < str.length(); j++) {
+                for (int k = 0; k < str.length(); k++) {
+                    StringBuffer tryPassword = new StringBuffer();
+                    n++;
+                    tryPassword.append(str.charAt(i)).append(str.charAt(j)).append(str.charAt(k));
+                    if (tryPassword.toString().equals(password)){
+                        System.out.printf("试了%d次%n",n);
+                    }
+                }
+            }
+        }
     }
     // 递归穷举
-    public static void test2(){
+    static int n = 0;
+    public static void test2(String password){
 
     }
     public static void main(String[] args) {
@@ -80,5 +102,8 @@ public class Str {
 
          要求： 分别使用多层for循环 和 递归解决上述问题
          */
+        String strPassword = randomStr1(3);
+        test1(strPassword);
+        test2(strPassword);
     }
 }
