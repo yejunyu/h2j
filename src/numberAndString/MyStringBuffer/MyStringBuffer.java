@@ -1,6 +1,26 @@
 package numberAndString.MyStringBuffer;
 
 public class MyStringBuffer implements IStringBuffer{
+    int capacity = 16;
+    int length = 0;
+    char[] value;
+
+    public MyStringBuffer(){
+        value = new char[capacity];
+    }
+
+    //有参构造方法
+    public MyStringBuffer(String str){
+        if(null!=str){
+            value =str.toCharArray();
+        }
+        length = value.length;
+
+        if(capacity<value.length) {
+            capacity = value.length * 2;
+        }
+    }
+
     @Override
     public void append(String str) {
         
