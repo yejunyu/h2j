@@ -3,9 +3,7 @@ package date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
-import java.util.Date;
 import java.util.Random;
-import java.util.logging.SimpleFormatter;
 
 /**
  * @author yejunyu
@@ -42,17 +40,28 @@ public class MyDate {
          按照这些日期的时间进行升序排序
          比如 1988-1-21 12:33:22 就会排在 1978-4-21 19:07:23 前面，因为它的时间更小，虽然日期更大
          */
-        String[] b = randomDate(9, "1970.1.1 00:00:00", "2000.12.31 23:59:59");
+        int length = 9;
+        String[] b = randomDate(length, "1970.1.1 00:00:00", "2000.12.31 23:59:59");
+        System.out.println(Arrays.toString(b));
         SimpleDateFormat df = new SimpleDateFormat("HH:mm:ss");
-        Long e;
-        Long[] es = new Long[9];
-        for (int i = 0; i < 9; i++) {
-            try {
-                e = df.parse(b[i].substring(9)).getTime();
-                es[i] = e;
-            } catch (ParseException e1) {
-                e1.printStackTrace();
+        Long e,d;
+        String temp;
+        try {
+            for (int i = 0; i < length-1; i++) {
+                for (int j = 0; j < length-1-i; j++) {
+                    e = df.parse(b[j].substring(11)).getTime();
+                    d = df.parse(b[j+1].substring(11)).getTime();
+                    if (e > d){
+                        temp = b[j];
+                        b[j] = b[j+1];
+                        b[j+1] = temp;
+                    }
+                }
+
             }
+        }catch (ParseException e1){
+            System.out.println(e1.getMessage());
         }
+        System.out.println(Arrays.toString(b));
     }
 }
