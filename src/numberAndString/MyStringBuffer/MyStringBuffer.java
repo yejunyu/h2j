@@ -53,7 +53,11 @@ public class MyStringBuffer implements IStringBuffer{
 
     @Override
     public void reverse() {
-
+        for (int i = 0; i < length / 2; i++) {
+            char temp = value[i];
+            value[i] = value[length-1];
+            value[length-1] = temp;
+        }
     }
 
     @Override
