@@ -1,5 +1,7 @@
 package numberAndString.MyStringBuffer;
 
+import java.util.Arrays;
+
 public class MyStringBuffer implements IStringBuffer{
     int capacity = 16;
     int length = 0;
@@ -22,8 +24,22 @@ public class MyStringBuffer implements IStringBuffer{
     }
 
     @Override
+    public String toString() {
+        return Arrays.toString(value);
+    }
+
+    @Override
     public void append(String str) {
-        
+        if(str!=null){
+            char[] a = str.toCharArray();
+            int aLength = str.length();
+            if((length+aLength)>capacity){
+                capacity = capacity * 2;
+            }
+            for (int i = 0; i < aLength; i++) {
+
+            }
+        }
     }
 
     @Override
