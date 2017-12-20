@@ -17,10 +17,12 @@ public class MyStringBuffer implements IStringBuffer{
             value =str.toCharArray();
         }
         length = value.length;
-
         if(capacity<value.length) {
             capacity = value.length * 2;
         }
+        char[] newValue = new char[capacity];
+        System.arraycopy(value,0,newValue,0,length);
+        value = newValue;
     }
 
     @Override
@@ -30,30 +32,42 @@ public class MyStringBuffer implements IStringBuffer{
 
     @Override
     public void append(String str) {
-        if(str!=null){
-            char[] a = str.toCharArray();
-            int aLength = str.length();
-            if((length+aLength)>capacity){
-                capacity = capacity * 2;
-            }
-            for (int i = 0; i < aLength; i++) {
-
-            }
-        }
+        insert(length, str);
     }
 
     @Override
     public void append(char c) {
-
+        insert(length, c);
     }
 
     @Override
     public void insert(int pos, char b) {
-
+        insert(pos, String.valueOf(b));
     }
 
     @Override
     public void insert(int pos, String b) {
+        if (pos<0 || pos>length){
+            return;
+        }
+        if(b==null){
+            return;
+        }
+        char[] insertB = b.toCharArray();
+        int newLength = b.length();
+        if (length+newLength>capacity){
+            capacity = capacity * 2;
+        }
+        char[] newValue = new char[capacity];
+        // 1. 元素后移
+        // value pos 之后的元素全都后移 String b 长度的位置
+        // System.arraycopy(value,);
+        // 2. 插入元素
+        // pos 位置插入 String b 的长度
+        System.arraycopy(insertB,0,newValue,pos,newLength);
+        // pos 之前的不变
+        System.arraycopy(value,0,newValue,0,pos);
+
 
     }
 
@@ -78,6 +92,7 @@ public class MyStringBuffer implements IStringBuffer{
 
     @Override
     public int length() {
-        return 0;
+        return value.length;
     }
+
 }
