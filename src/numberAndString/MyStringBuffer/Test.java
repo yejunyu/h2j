@@ -25,7 +25,7 @@ public class Test {
         a.reverse();
         System.out.println(a);
         System.out.println(a.length());
-        // 无参构造
+        // 有参构造
         MyStringBuffer b = new MyStringBuffer("1234567890");
         b.append("a");
         System.out.println(b);
