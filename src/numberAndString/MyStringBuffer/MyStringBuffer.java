@@ -76,12 +76,32 @@ public class MyStringBuffer implements IStringBuffer{
 
     @Override
     public void delete(int start) {
-
+        if (start >= length || start < 0){
+            return;
+        }
+        char[] newValue = new char[start];
+        System.arraycopy(value,0,newValue,0,start);
+        value = newValue;
+        length = start;
     }
 
     @Override
     public void delete(int start, int end) {
-
+        if (start >= length || start < 0){
+            return;
+        }
+        if (end >= length || start < 0){
+            return;
+        }
+        if (end < start){
+            return;
+        }
+        int newLength = length-(end-start);
+        char[] newValue = new char[newLength];
+        System.arraycopy(value,0,newValue,0,start);
+        System.arraycopy(value,end,newValue,start,length-end);
+        value = newValue;
+        length = newLength;
     }
 
     @Override
