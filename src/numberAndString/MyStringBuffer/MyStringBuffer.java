@@ -1,5 +1,8 @@
 package numberAndString.MyStringBuffer;
 
+import myException.IndexIsNegativeException;
+import myException.IndexIsOutofRangeException;
+
 import java.util.Arrays;
 
 public class MyStringBuffer implements IStringBuffer{
@@ -34,24 +37,27 @@ public class MyStringBuffer implements IStringBuffer{
     }
 
     @Override
-    public void append(String str) {
+    public void append(String str) throws IndexIsNegativeException, IndexIsOutofRangeException {
         insert(length, str);
     }
 
     @Override
-    public void append(char c) {
+    public void append(char c) throws IndexIsNegativeException, IndexIsOutofRangeException {
         insert(length, c);
     }
 
     @Override
-    public void insert(int pos, char b) {
+    public void insert(int pos, char b) throws IndexIsNegativeException, IndexIsOutofRangeException {
         insert(pos, String.valueOf(b));
     }
 
     @Override
-    public void insert(int pos, String b) {
-        if (pos<0 || pos>length){
-            return;
+    public void insert(int pos, String b) throws IndexIsNegativeException, IndexIsOutofRangeException {
+        if (pos<0){
+            throw new IndexIsNegativeException("插入位置不能为负!");
+        }
+        if (pos > length){
+            throw new IndexIsOutofRangeException("插入位置超出范围");
         }
         if(b==null){
             return;
