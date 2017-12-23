@@ -66,16 +66,7 @@ public class MyStringBuffer implements IStringBuffer{
 
     @Override
     public void delete(int start) throws IndexIsNegativeException, IndexIsOutofRangeException {
-        if (start < 0){
-            throw new IndexIsNegativeException("插入位置不能为负");
-        }
-        if (start > value.size()){
-            throw new IndexIsOutofRangeException("插入超出范围");
-        }
-        for (int i = start; i < value.size(); i++) {
-            value.remove(i);
-        }
-        System.out.println(value);
+        delete(start, value.size());
     }
 
     @Override
@@ -87,7 +78,7 @@ public class MyStringBuffer implements IStringBuffer{
             throw new IndexIsOutofRangeException("插入超出范围");
         }
         for (int i = start; i < end; i++) {
-            value.remove(i);
+            value.remove(start);
         }
         System.out.println(value);
     }
@@ -105,6 +96,7 @@ public class MyStringBuffer implements IStringBuffer{
 
     @Override
     public int length() {
+        System.out.println(value.size());
         return value.size();
     }
 
@@ -114,9 +106,9 @@ public class MyStringBuffer implements IStringBuffer{
             a.insert(0,"a");
             a.insert(1, 'b');
             a.append('c');
-            a.append("d");
+            a.append("abcdefg");
             a.delete(1,2);
-            a.delete(1);
+            a.delete(4);
             a.reverse();
             a.length();
         } catch (IndexIsNegativeException e) {
