@@ -15,6 +15,13 @@ public class ArrayListTest {
         for (int i = 0; i < 10; i++) {
             Heros.add(new Hero("hero"+i));
         }
-
+        String name = "hero9";
+        for (int i = 0; i < Heros.size(); i++) {
+            if (name.equalsIgnoreCase(Heros.get(i).getName())){
+                System.out.println("找到了!");
+                System.out.println("第"+i+"个");
+                break;
+            }
+        }
     }
 }
