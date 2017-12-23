@@ -22,6 +22,7 @@ public class Test {
 
          通过遍历的手段，删除掉名字编号是7的倍数和带7的对象
          */
+        // 方法1
         List<Hero> Heros = new ArrayList<>();
         for (int i = 0; i < 100; i++) {
             Heros.add(new Hero("hero"+i));
@@ -34,6 +35,28 @@ public class Test {
             }
         }
         System.out.println(Heros);
+
+        // 方法2
+        List<Hero> Heros1 = new ArrayList<>();
+        for (int i = 0; i < 100; i++) {
+            Heros1.add(new Hero("hero"+i));
+        }
+        // 准备一个 List 存放要删除的元素
+        List<Hero> delHeros = new ArrayList<>();
+        for (Hero delHero : Heros1) {
+            String num = delHero.getName().substring(4);
+            if (num.contains("7") || Integer.valueOf(num) % 7 == 0) {
+                delHeros.add(delHero);
+            }
+        }
+        System.out.println(delHeros);
+        for (Hero delHero : delHeros) {
+           Heros1.remove(delHero);
+        }
+        System.out.println(Heros1);
+        // removeAll
+//        Heros1.removeAll(delHeros);
+//        System.out.println(Heros1);
     }
     public static void main(String[] args) {
         /**
