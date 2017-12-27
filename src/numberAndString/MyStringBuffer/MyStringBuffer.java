@@ -5,6 +5,7 @@ import myException.IndexIsOutofRangeException;
 
 import java.util.Arrays;
 
+
 public class MyStringBuffer implements IStringBuffer{
     int capacity = 16;
     int length = 0;

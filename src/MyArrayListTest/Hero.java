@@ -7,8 +7,11 @@ package MyArrayListTest;
 public class Hero {
     private String name;
 
-    public Hero(String name) {
+    private double HP;
+
+    public Hero(String name, double HP) {
         this.name = name;
+        this.HP = HP;
     }
 
     @Override
