@@ -9,6 +9,10 @@ public class Hero {
 
     private double HP;
 
+    public Hero(String name) {
+        this.name = name;
+    }
+
     public Hero(String name, double HP) {
         this.name = name;
         this.HP = HP;
@@ -16,11 +20,19 @@ public class Hero {
 
     @Override
     public String toString() {
-        return name;
+        return name+","+HP+"\t";
     }
 
     public String getName() {
         return name;
+    }
+
+    public double getHP() {
+        return HP;
+    }
+
+    public void setHP(double HP) {
+        this.HP = HP;
     }
 
     public void setName(String name) {

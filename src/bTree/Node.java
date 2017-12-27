@@ -42,6 +42,7 @@ public class Node {
             values.addAll(leftNode.values());
         }
         values.add(value);
+        // 右节点遍历
         if (null != rightNode) {
             values.addAll(rightNode.values());
         }
