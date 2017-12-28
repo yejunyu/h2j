@@ -8,7 +8,7 @@ import java.util.LinkedList;
  */
 public class MyHashMap {
     int cap = 2000;
-    LinkedList<Object>[] maplist;
+    LinkedList<MyEntry>[] maplist;
 
     public MyHashMap() {
         maplist = new LinkedList[cap];
@@ -25,12 +25,21 @@ public class MyHashMap {
         String string = String.valueOf(str);
         int hashcode = hashcode(string);
         if (null == maplist[hashcode]){
-            LinkedList<Object> linkedList = new LinkedList<>();
-            linkedList.offer(obj);
+            MyEntry entry = new MyEntry(str, obj);
+            LinkedList<MyEntry> linkedList = new LinkedList<>();
+            linkedList.offer(entry);
             maplist[hashcode] = linkedList;
             return;
+        } else {
+            for (MyEntry entry : maplist[hashcode]) {
+                if (str.equals(entry.getKey())){
+                    throw new MyHashMapException("key 已存在!");
+                }
+            }
+            MyEntry entry = new MyEntry(str, obj);
+            maplist[hashcode].offer(entry);
+            return;
         }
-        maplist[hashcode].offer(obj);
     }
 
     /**
@@ -47,9 +56,14 @@ public class MyHashMap {
             return null;
         } else {
             if (1 == maplist[hashcode].size()){
-                return maplist[hashcode].get(0);
+                MyEntry entry = maplist[hashcode].get(0);
+                return entry.getValue();
             }else {
-
+                for (MyEntry entry : maplist[hashcode]) {
+                    if (entry.getKey().equals(str)){
+                        return entry.getValue();
+                    }
+                }
                 return null;
             }
         }
@@ -78,5 +92,16 @@ public class MyHashMap {
     }
 
     public static void main(String[] args) {
+        MyHashMap hashMap = new MyHashMap();
+        hashMap.put(1, "a");
+        hashMap.put(2, "a");
+        hashMap.put(3, "b");
+        hashMap.put("a",3);
+        System.out.println(hashMap.get(1));
+        System.out.println(hashMap.get(2));
+        System.out.println(hashMap.get(3));
+        System.out.println(hashMap.get("a"));
+        System.out.println(hashMap.get("b"));
+//        hashMap.put(1, "a");
     }
 }
