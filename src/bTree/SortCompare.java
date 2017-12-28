@@ -125,11 +125,11 @@ public class SortCompare {
         @Override
         public int[] values() {
             List<Object> list = root.values();
-            int sortedNumbers[] = new int[list.size()];
-            for (int i = 0; i < sortedNumbers.length; i++) {
-                sortedNumbers[i] = Integer.parseInt(list.get(i).toString());
+            int values[] = new int[list.size()];
+            for (int i = 0; i < values.length; i++) {
+                values[i] = Integer.parseInt(list.get(i).toString());
             }
-            return sortedNumbers;
+            return values;
         }
     }
 
