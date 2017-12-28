@@ -64,27 +64,39 @@ public class Test {
          */
         // 迭代器
         List<Hero> Heros = new ArrayList<>();
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < 50000; i++) {
             Heros.add(new Hero("hero" + i));
         }
         // Iterator 第一种写法
+        long start = System.currentTimeMillis();
         Iterator<Hero> Hero = Heros.iterator();
         while (Hero.hasNext()) {
             Hero a = Hero.next();
-            System.out.println(a);
+            a.setName("abc");
+            //System.out.print(a);
         }
+        long end = System.currentTimeMillis();
+        System.out.println("第一种:"+(end-start));
 
-        // Iterator 第一种写法
+        // Iterator 第二种写法
+        start = System.currentTimeMillis();
         for (Iterator<Hero> Hero1 = Heros.iterator(); Hero1.hasNext(); ) {
             Hero b = Hero1.next();
-            System.out.println(b);
+            //System.out.print(b);
+            b.setName("abc");
         }
+        end = System.currentTimeMillis();
+        System.out.println("第二种:"+(end-start));
 
         // foreach
+        start = System.currentTimeMillis();
         for (MyArrayListTest.Hero hero : Heros) {
-            System.out.println(hero);
+            //System.out.print(hero);
+            hero.setName("abc");
         }
+        end = System.currentTimeMillis();
+        System.out.println("foreach:"+(end-start));
 
-        test();
+        //test();
     }
 }

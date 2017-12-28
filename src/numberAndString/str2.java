@@ -1,6 +1,7 @@
 package numberAndString;
 
 import java.util.Arrays;
+import java.util.HashSet;
 
 /**
  * @author yejunyu
@@ -10,11 +11,23 @@ public class str2 {
     public static void test1(String[] strArr){
         for (int i = 0; i < strArr.length-1; i++) {
             for (int j = i+1; j < strArr.length; j++) {
-                if (strArr[i].equalsIgnoreCase(strArr[j])){
+                if (strArr[i].equals(strArr[j])){
                     System.out.println(strArr[j]);
                 }
             }
         }
+    }
+
+    // hashSet来判断有多少个重复字符串
+    public static void test2(String[] strArr){
+        HashSet<String> hashSet = new HashSet<>(100);
+        int n = 0;
+        for (String str : strArr) {
+            if(!hashSet.add(str)){
+                n++;
+            }
+        }
+        System.out.println(n);
     }
     public static void main(String[] args) {
         /**
@@ -29,5 +42,6 @@ public class str2 {
 //        String[] strArr = {"ab","Ab","aB","ss","SS","qq","QQ","eq","qe","1a"};
         System.out.println(Arrays.toString(strArr));
         test1(strArr);
+        test2(strArr);
     }
 }
