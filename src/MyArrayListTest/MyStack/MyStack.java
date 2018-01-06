@@ -2,6 +2,7 @@ package MyArrayListTest.MyStack;
 
 import MyArrayListTest.Hero;
 
+import java.util.Collections;
 import java.util.LinkedList;
 
 /**
@@ -13,7 +14,8 @@ public class MyStack implements Stackk{
     LinkedList<Hero> values;
 
     public MyStack() {
-        values = new LinkedList<>();
+//        values = new LinkedList<>();
+        values = (LinkedList<Hero>) Collections.synchronizedList(new LinkedList<Hero>());
     }
 
     @Override
