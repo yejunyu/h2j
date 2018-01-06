@@ -3,7 +3,6 @@ package MyArrayListTest.MyStack;
 import MyArrayListTest.Hero;
 
 import java.util.LinkedList;
-import java.util.Stack;
 
 /**
  * @author yejunyu
@@ -28,12 +27,12 @@ public class MyStack implements Stackk{
     }
 
     @Override
-    public void push(Hero h) {
+    public synchronized void push(Hero h) {
         values.offer(h);
     }
 
     @Override
-    public Hero pop() {
+    public synchronized Hero pop() {
         return values.removeLast();
     }
 
