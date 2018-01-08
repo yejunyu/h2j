@@ -18,13 +18,18 @@ public class Test2 {
         /**
          * wait notify
          */
+        final Hero gareen = new Hero();
+        gareen.name = "盖伦";
+        gareen.hp = 61;
+
         Thread t1 = new Thread(){
             @Override
             public void run() {
                 while (true) {
-                    new Test2().add();
+                    gareen.hurt();
+                    System.out.printf("t1 为%s 减血1点,减少血后，%s的血量是%.0f%n", gareen.name, gareen.name, gareen.hp);
                     try {
-                        Thread.sleep(1000);
+                        Thread.sleep(100);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
@@ -33,22 +38,26 @@ public class Test2 {
 
         };
         t1.start();
+        t1.start();
+
         Thread t2 = new Thread(){
             @Override
             public void run() {
-                while (true){
-                    new Test2().minus();
-                    while (count <= 10){
-                        continue;
+                while (true) {
+                    gareen.recover();
+                    System.out.printf("t2 为%s 回血1点,增加血后，%s的血量是%.0f%n", gareen.name, gareen.name, gareen.hp);
+                    try {
+                        Thread.sleep(100);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
                     }
-                try {
-                    Thread.sleep(100);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
                 }
             }
         };
+        t2.start();
+        t2.start();
+        t2.start();
+        t2.start();
         t2.start();
     }
 }
