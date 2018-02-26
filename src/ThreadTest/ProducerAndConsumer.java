@@ -28,37 +28,52 @@ public class ProducerAndConsumer {
         int a = r.nextInt(26) + 65;
         return (char) a;
     }
-    public synchronized void push(char a){
-        if(myStack.size() > 10){
-            try {
-                this.wait();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
+    static class Producer implements Runnable{
+        public synchronized void push(char a){
+            if(myStack.size() > 10){
+                try {
+                    this.wait();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
             }
+            myStack.push(String.valueOf(a));
         }
-        myStack.push(String.valueOf(a));
-    }
-    public synchronized String pop(){
-        if (myStack.size() > 0){
-            return myStack.pop();
-        }
-        return null;
-    }
-    class Producer implements Runnable{
 
         @Override
         public void run() {
-
+            char a = randomABC();
+            push(a);
+            System.out.println(myStack);
         }
     }
-    class Consumer implements Runnable{
+    static class Consumer implements Runnable{
+        public synchronized String pop(){
+            if (myStack.size() > 0){
+                return myStack.pop();
+            }
+            if (myStack.size() == 0){
+                this.notify();
+            }
+            return null;
+        }
 
         @Override
         public void run() {
-
+            String a = pop();
+            System.out.println(a);
+            System.out.println(myStack);
         }
     }
     public static void main(String[] args) {
-        System.out.println(randomABC());
+        myStack = new Stack<>();
+        for (int i = 0; i < 3; i++) {
+            Producer producer = new Producer();
+            new Thread(producer).start();
+        }
+        for (int i = 0; i < 3; i++) {
+            Consumer consumer = new Consumer();
+            new Thread(consumer).start();
+        }
     }
 }
