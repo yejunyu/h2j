@@ -29,7 +29,7 @@ public class Test2 {
                     gareen.hurt();
                     System.out.printf("t1 为%s 减血1点,减少血后，%s的血量是%.0f%n", gareen.name, gareen.name, gareen.hp);
                     try {
-                        Thread.sleep(100);
+                        Thread.sleep(10);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
@@ -37,9 +37,6 @@ public class Test2 {
             }
 
         };
-        t1.start();
-        t1.start();
-
         Thread t2 = new Thread(){
             @Override
             public void run() {
@@ -54,10 +51,7 @@ public class Test2 {
                 }
             }
         };
-        t2.start();
-        t2.start();
-        t2.start();
-        t2.start();
+        t1.start();
         t2.start();
     }
 }

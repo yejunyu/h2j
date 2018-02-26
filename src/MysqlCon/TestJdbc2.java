@@ -6,6 +6,7 @@ package MysqlCon;
  */
 public class TestJdbc2 {
     public static void main(String[] args) {
+        String a = "((((((((((()))))))))))";
 
     }
 }

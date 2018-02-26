@@ -126,8 +126,12 @@ public class SortCompare {
         public int[] values() {
             List<Object> list = root.values();
             int values[] = new int[list.size()];
+
+
+//            int values[] = new int[root.values().size()];
             for (int i = 0; i < values.length; i++) {
                 values[i] = Integer.parseInt(list.get(i).toString());
+//                values[i] = Integer.parseInt(root.values().get(i).toString());
             }
             return values;
         }

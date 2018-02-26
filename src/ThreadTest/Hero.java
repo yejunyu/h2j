@@ -12,7 +12,9 @@ public class Hero {
 
     public synchronized void recover(){
         hp = hp + 1;
-        this.notify();
+        if (hp >= 60){
+            this.notify();
+        }
     }
 
     public synchronized void hurt(){
