@@ -23,28 +23,44 @@ public class ProducerAndConsumer {
      */
     private static Stack<String> myStack;
 
-    public static Character randomABC(){
-        Random r = new Random();
-        int a = r.nextInt(26) + 65;
-        return (char) a;
-    }
-    static class Producer implements Runnable{
-        public synchronized void push(char a){
-            if(myStack.size() > 10){
+    static class MyStack<T> {
+        Stack<Character> values = new Stack<Character>();
+
+        public synchronized void push(T t){
+            while (values.size()>10){
                 try {
                     this.wait();
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
             }
-            myStack.push(String.valueOf(a));
+            this.notifyAll();
+            values.push((Character) t);
         }
+
+        public synchronized void pop(T t){
+            while (values.empty()){
+                try {
+                    this.wait();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+            this.notifyAll();
+            values.pop();
+        }
+    }
+    public static Character randomABC(){
+        Random r = new Random();
+        int a = r.nextInt(26) + 65;
+        return (char) a;
+    }
+    static class Producer implements Runnable{
 
         @Override
         public void run() {
             char a = randomABC();
-            push(a);
-            System.out.println(myStack);
+
         }
     }
     static class Consumer implements Runnable{
