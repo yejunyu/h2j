@@ -28,6 +28,7 @@ public class ProducerAndConsumer {
 
         public synchronized void push(T t){
             while (values.size()>10){
+                System.out.println("满了");
                 try {
                     this.wait();
                 } catch (InterruptedException e) {
@@ -38,8 +39,9 @@ public class ProducerAndConsumer {
             values.push((Character) t);
         }
 
-        public synchronized void pop(T t){
+        public synchronized Character pop(){
             while (values.empty()){
+                System.out.println("空了");
                 try {
                     this.wait();
                 } catch (InterruptedException e) {
@@ -47,7 +49,7 @@ public class ProducerAndConsumer {
                 }
             }
             this.notifyAll();
-            values.pop();
+            return values.pop();
         }
     }
     public static Character randomABC(){
@@ -56,39 +58,58 @@ public class ProducerAndConsumer {
         return (char) a;
     }
     static class Producer implements Runnable{
+        private MyStack<Character> myStack;
+        private String name;
+
+        public Producer(MyStack<Character> myStack,String name) {
+            this.myStack = myStack;
+            this.name = name;
+        }
 
         @Override
         public void run() {
-            char a = randomABC();
-
+            while (true) {
+                Character c = randomABC();
+                myStack.push(c);
+                System.out.println(name + " push :" + c);
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
         }
     }
     static class Consumer implements Runnable{
-        public synchronized String pop(){
-            if (myStack.size() > 0){
-                return myStack.pop();
-            }
-            if (myStack.size() == 0){
-                this.notify();
-            }
-            return null;
+        private MyStack<Character> myStack;
+        private String name;
+
+        public Consumer(MyStack<Character> myStack, String name) {
+            this.myStack = myStack;
+            this.name = name;
         }
 
         @Override
         public void run() {
-            String a = pop();
-            System.out.println(a);
-            System.out.println(myStack);
+            while (true) {
+                Character c = myStack.pop();
+                System.out.println(name + " pop :" + c);
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
         }
     }
     public static void main(String[] args) {
-        myStack = new Stack<>();
+        MyStack<Character> myStack = new MyStack<>();
         for (int i = 0; i < 3; i++) {
-            Producer producer = new Producer();
+            Producer producer = new Producer(myStack,"producer"+i);
             new Thread(producer).start();
         }
         for (int i = 0; i < 3; i++) {
-            Consumer consumer = new Consumer();
+            Consumer consumer = new Consumer(myStack,"consumer"+i);
             new Thread(consumer).start();
         }
     }
