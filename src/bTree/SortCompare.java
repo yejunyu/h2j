@@ -19,7 +19,7 @@ public class SortCompare {
             originalNumbers[i] = (int)(Math.random()*total);
         }
         System.out.println("初始化完毕");
-        System.out.println(Arrays.toString(originalNumbers));
+//        System.out.println(Arrays.toString(originalNumbers));
         // 复制原有数组
         int[] use4sort;
 
@@ -32,11 +32,11 @@ public class SortCompare {
         use4sort = Arrays.copyOf(originalNumbers, originalNumbers.length);
         int[] sortedNumbersByTree = performance(new TreeSort(use4sort), "二叉树排序法");
 
-        System.out.println(Arrays.toString(sortedNumbersByTree));
+//        System.out.println(Arrays.toString(sortedNumbersByTree));
 
-        System.out.println(Arrays.equals(sortedNumbersByBubbling, sortedNumbersBySelection));
+//        System.out.println(Arrays.equals(sortedNumbersByBubbling, sortedNumbersBySelection));
 
-        System.out.println(Arrays.equals(sortedNumbersByBubbling, sortedNumbersByTree));
+//        System.out.println(Arrays.equals(sortedNumbersByBubbling, sortedNumbersByTree));
     }
 
     interface sort{
