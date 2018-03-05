@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!--相对定位的文字3 在原来的位置的基础上，向右移动150个像素，但是又不占用原来的坑。
+
+结合相对定位和绝对定位实现这个效果
+正常文字1
+
+正常文字2
+
+正常文字4      相对定位的文字3(不占坑)
+
+正常文字5
+-->
+<style>
+    div.r{
+        position:absolute;
+    }
+    div.a{
+        position:relative;
+        left:100px
+    }
+</style>
+
+<p>正常文字1</p>
+<p>正常文字2</p>
+<div class="r">
+    <div class="a">相对定位的文字3(不占坑)</div>
+</div>
+<p>正常文字4</p>
+<p>正常文字5</p>
+</body>
+</html>
