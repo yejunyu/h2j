@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>字符串替换工具</title>
+</head>
+<body>
+字符串替换工具
+源字符串:
+<textarea name="" id="a" cols="30" rows="10"></textarea>
+查询:
+<input id="b" type="text">
+替换为:
+<input id="c" type="text">
+替换结果:
+<textarea name="" id="d" cols="30" rows="10"></textarea>
+<button onclick="fun()">替换</button>
+<script>
+    function fun() {
+        var a = $('a');
+        var b = $('b');
+        var c = $('c');
+        var reg = new RegExp(b,'g');
+        var d = a.replace(reg,c);
+        document.getElementById('d').value = d;
+    }
+    function $(id) {
+        return document.getElementById(id).value;
+    }
+</script>
+</body>
+</html>

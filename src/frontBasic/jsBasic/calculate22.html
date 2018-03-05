@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>复利计算</title>
+</head>
+<body>
+<style>
+    table{
+        border-collapse:collapse;
+    }
+    td{
+        border:1px silver solid;
+        padding: 5px;
+        font-size:12px;
+    }
+    input{
+        width:80px;
+    }
+</style>
+<table>
+    <tr>
+        <td>起始资金</td>
+        <td><input type="text" id="initMoney" value='0'> ￥</td>
+    <tr>
+        <td>每年收益</td>
+        <td><input type="text" id="rate" value='0'> %</td>
+    </tr>
+    <tr>
+        <td>复利年数</td>
+        <td><input type="text" id="year" value='1'> 年</td>
+    </tr>
+    <tr>
+        <td>每年追加资金</td>
+        <td><input type="text" id="each" value='0'> ￥</td>
+    </tr>
+    <tr>
+        <td colspan="2" align="center"><input type="button" value="计算" onmouseover="cal()"></td>
+    </tr>
+    <tr>
+        <td>本金和</td>
+        <td><input type="text" id="sum1" disabled="disabled"  value='0'> ￥</td>
+    </tr>
+    <tr>
+        <td>利息和</td>
+        <td><input type="text" id="sum2"  disabled="disabled" value='0'> ￥</td>
+    </tr>
+    <tr>
+        <td>本息和</td>
+        <td><input type="text" id="sum3"  disabled="disabled" value='0'> ￥</td>
+    </tr>
+</table>
+<script>
+    function cal() {
+        try{
+            var initMoney = $("initMoney");
+            var rate = $("rate");
+            var year = $("year");
+            var each = $("each");
+            initMoney = parseFloat(initMoney);
+            rate = parseFloat(rate);
+            year = parseFloat(year);
+            each = parseFloat(each);
+            var sum1 = initMoney + each * (year-1);
+            var sum3 = initMoney * Math.pow((1+rate/100),year) - each*(1+rate/100)*(1-Math.pow(1+rate/100,year-1)/(rate/100));
+            var sum2 = sum3 - sum1;
+            document.getElementById("sum1").value = sum1;
+            document.getElementById("sum2").value = sum2;
+            document.getElementById("sum3").value = sum3;
+        }catch (err){
+            alert(err.message);
+        }
+    }
+    function $(id) {
+        return document.getElementById(id).value;
+    }
+</script>
+</body>
+</html>
