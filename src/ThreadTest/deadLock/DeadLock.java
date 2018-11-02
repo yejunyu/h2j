@@ -18,11 +18,11 @@ public class DeadLock {
             public void run() {
                 synchronized (a){
                     System.out.println("占有 a");
-//                    try {
-//                        Thread.sleep(1000);
-//                    } catch (InterruptedException e) {
-//                        e.printStackTrace();
-//                    }
+                    try {
+                        Thread.sleep(1000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
                     System.out.println("等待 b");
                     synchronized (b){
                         System.out.println("让 b 做 something");
@@ -36,11 +36,11 @@ public class DeadLock {
             public void run() {
                 synchronized (b){
                     System.out.println("占有 b");
-//                    try {
-//                        Thread.sleep(1000);
-//                    } catch (InterruptedException e) {
-//                        e.printStackTrace();
-//                    }
+                    try {
+                        Thread.sleep(1000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
                     System.out.println("等待 a");
                     synchronized (a){
                         System.out.println("让 a 做 something");
@@ -50,5 +50,4 @@ public class DeadLock {
         };
         t2.start();
     }
-
 }
